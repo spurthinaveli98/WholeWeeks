@@ -17,7 +17,7 @@ public class WholeWeeks {
             year = scanner.nextInt();
             startMonth = scanner.next();
             endMonth = scanner.next();
-            log.info(computeWholeWeeks(year,startMonth,endMonth)+" weeks are spent by John in Hawaii");
+            log.info(computeWholeWeeks(year,startMonth,endMonth)+" weeks will be spent by John in Hawaii");
     }
 
     public static String computeWholeWeeks(int year, String startMonth, String endMonth){
