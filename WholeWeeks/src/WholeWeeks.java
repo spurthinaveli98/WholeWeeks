@@ -18,30 +18,29 @@ public class WholeWeeks {
             startMonth = scanner.next();
             endMonth = scanner.next();
             log.info(computeWholeWeeks(year,startMonth,endMonth)+" weeks are spent by John in Hawaii");
-
     }
 
     public static String computeWholeWeeks(int year, String startMonth, String endMonth){
-        int firstMonday, lastSunday;
+        LocalDate firstMonday, lastSunday;
         try {
             firstMonday = calculateFirstMonday(year, startMonth);
             lastSunday = calculateLastSunday(year, endMonth);
-            LocalDate firstDate = LocalDate.of(year, Month.valueOf(startMonth.toUpperCase()), firstMonday);
-            LocalDate lastDate = LocalDate.of(year, Month.valueOf(endMonth.toUpperCase()), lastSunday + 1);
-            return String.valueOf(ChronoUnit.WEEKS.between(firstDate, lastDate));
+            long weeks = ChronoUnit.WEEKS.between(firstMonday, lastSunday)+1;
+            return String.valueOf(weeks);
         }
         catch (Exception e){
           return e.getMessage();
         }
     }
-    private static int calculateFirstMonday(int year, String startMonth){
+
+    private static LocalDate calculateFirstMonday(int year, String startMonth){
         LocalDate startingMondayDate = LocalDate.of(year, Month.valueOf(startMonth.toUpperCase()), 1).with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
-        return startingMondayDate.getDayOfMonth();
+        return startingMondayDate;
     }
 
-    private static int calculateLastSunday(int year, String endMonth){
+    private static LocalDate calculateLastSunday(int year, String endMonth){
         LocalDate lastSundayDate = LocalDate.of(year, Month.valueOf(endMonth.toUpperCase()), 1).with(TemporalAdjusters.lastInMonth(DayOfWeek.SUNDAY));
-        return lastSundayDate.getDayOfMonth();
+        return lastSundayDate;
     }
 
 }
